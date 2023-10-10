@@ -1,0 +1,40 @@
+#.zsh/secret.zsh
+.DS_Store
+.aws
+.config/anyenv
+.config/coc
+.config/configstore
+.config/configstore/firebase-tools.json
+.config/configstore/update-notifier-firebase-tools.json
+.config/configstore/update-notifier-npm.json
+.config/direnv
+.config/flutter
+.config/gatsby
+.config/gcloud
+.config/gh
+.config/gtk-2.0
+.config/iterm2
+.config/jgit
+.config/karabiner/automatic_backups/*
+.config/nnn
+.config/nvim/plugin/packer_compiled.lua
+.config/op
+.config/raycast
+.config/yarn
+
+# oauth tokenが含まれる
+.config/github-copilot/hosts.json
+Brewfile.bk
+
+# vim
+.vim/plugged
+.vim/.netrwhist
+.vim/sessions
+
+# tmux
+.tmux/plugins
+.tmux/resurrect
+
+test.txt
+
+*/**/*.zwc

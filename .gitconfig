@@ -1,0 +1,28 @@
+[user]
+	name = yoichi-aoyama
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[alias]
+	s   = status -b
+	st  = status -sb
+	d   = diff
+	co  = checkout
+	cob = checkout -b
+	sw  = switch
+	swc = switch -c
+	br  = branch
+	brv = branch -vv
+	ft  = fetch
+	pl  = pull
+	push-f = push --force-with-lease
+[init]
+	defaultBranch = main
+[pull]
+	ff = only
+[fetch]
+    prune = true
+[push]
+	autoSetupRemote = true

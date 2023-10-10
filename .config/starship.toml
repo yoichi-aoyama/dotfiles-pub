@@ -1,0 +1,54 @@
+[time]
+#disabled = false
+
+[package]
+disabled = true
+
+[character]
+error_symbol = "[❯](bold red)"
+success_symbol = "[❯](bold green)"
+
+[aws]
+format = 'on [$symbol($profile )(\($region\) )]($style)'
+[aws.region_aliases]
+ap-northeast-1 = 'jp1'
+
+[docker_context]
+#format = 'via [🐋 $context](blue bold) '
+#format = '$symbol$context '
+format =''
+
+[golang]
+format = '[$symbol($version )($mod_version )]($style)'
+
+[git_branch]
+style = 'green'
+#symbol = ""
+symbol = '🌱'
+ignore_branches = ['master', 'main']
+
+[gcloud]
+#style = 'fg:234 bg:45'
+#format = '[$symbol$account(@$domain)(\($region\))]($style) '
+format = '[$symbol$account]($style) '
+#symbol = 'G-'
+symbol = '☁️g '
+
+#[username]
+#style_user = "white bold"
+#style_root = "black bold"
+#format = "[$user🌱]($style) "
+#disabled = false
+#show_always = true
+
+#[memory_usage]
+#disabled = false
+#threshold = -1
+#symbol = ' '
+#style = 'bold dimmed green'
+
+[shell]
+disabled = false
+zsh_indicator = 'z'
+bash_indicator = 'b'
+#style ='bg:white blue bold'
