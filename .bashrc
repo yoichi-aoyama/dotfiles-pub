@@ -1,6 +1,8 @@
 echo bash
 PS1="\t(\w)>"
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 # starship
 eval "$(starship init bash)"
 
@@ -77,5 +79,4 @@ function asdf-enable {
 
 COMMONSHHOME="${HOME}/.commonsh"
 source $COMMONSHHOME/alias.sh
-source $COMMONSHHOME/secret.sh
 

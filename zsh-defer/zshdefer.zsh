@@ -4,6 +4,8 @@ export PATH=/usr/bin:/bin:/usr/sbin:/sbin
 export PATH=/usr/local/bin:$PATH
 
 export PATH=/opt/homebrew/bin:$PATH
+export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+
 export PATH=$PATH:~/Library/Android/sdk/platform-tools
 export PATH=~/Library/Android/sdk/cmdline-tools/latest/bin:$PATH
 
