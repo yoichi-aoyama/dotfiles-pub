@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTPATH=~/dotfiles
+DOTPATH=~/dotfiles-pub
 
 for f in .??*
 do
