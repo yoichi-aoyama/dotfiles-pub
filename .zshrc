@@ -1,5 +1,24 @@
-#export PATH=/opt/homebrew/bin:$PATH
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if [ "$(uname)" == 'Darwin' ]; then
+  if [ "$(uname -m)" = "arm64" ]; then
+    OS='ArmMac'
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    # curl
+    export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
+    export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
+    export PKG_CONFIG_PATH="/opt/homebrew/opt/curl/lib/pkgconfig"
+  else
+    OS='IntelMac'
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+  OS='Linux'
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
+  OS='Cygwin'
+else
+  echo "Your platform ($(uname -a)) is not supported."
+  exit 1
+fi
 
 # starship
 eval "$(starship init zsh)"
