@@ -19,6 +19,7 @@
 .config/nnn
 .config/nvim/plugin/packer_compiled.lua
 .config/op
+.config/pulse
 .config/raycast
 .config/yarn
 
@@ -38,3 +39,6 @@ Brewfile.bk
 test.txt
 
 */**/*.zwc
+
+*.lock.json
+
