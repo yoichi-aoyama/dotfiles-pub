@@ -4,6 +4,8 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 brew: ## brew install from Brewfile
 	brew bundle install
+brew_linux: ## brew install from Brewfile for Linux
+	brew bundle install --file Brewfile_linux
 brew_backup: ## backup brew
 	brew bundle dump --file tmp.txt --force
 	cat tmp.txt | grep ^tap | sort > Brewfile.bk
