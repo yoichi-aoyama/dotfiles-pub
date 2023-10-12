@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTPATH=~/dotfiles-pub
+DOTPATH=$(cd $(dirname $0) && pwd)
 
 for f in .??*
 do
@@ -13,11 +13,6 @@ do
 done
 
 ln -snfv $DOTPATH/.zsh ~/.zsh
-#if [ ! -e ~/.config/nvim ];then
-#    echo setup neovim
-#    mkdir -p ~/.config
-#    ln -snfv $DOTPATH/nvim ~/.config/nvim
-#fi
 
 mkdir -p ~/tmp/vim_backup
 mkdir -p ~/.tmux/resurrect
