@@ -1,7 +1,7 @@
 echo bash
 PS1="\t(\w)>"
 
-if [ "$(uname)" == 'Darwin' ]; then
+if [ "$(uname)" = 'Darwin' ]; then
   if [ "$(uname -m)" = "arm64" ]; then
     OS='ArmMac'
     # curl
@@ -12,10 +12,10 @@ if [ "$(uname)" == 'Darwin' ]; then
     OS='IntelMac'
     eval "$(/usr/local/bin/brew shellenv)"
   fi
-elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+elif [ "$(expr substr $(uname -s) 1 5)" = 'Linux' ]; then
   OS='Linux'
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
+elif [ "$(expr substr $(uname -s) 1 10)" = 'MINGW32_NT' ]; then
   OS='Cygwin'
 else
   echo "Your platform ($(uname -a)) is not supported."
@@ -87,12 +87,16 @@ function switch-anyenv {
 
 # for asdf
 function asdf-enable {
-    if [ "$(uname -m)" = "arm64" ]; then
-        echo for arm asdf
-        . /opt/homebrew/opt/asdf/libexec/asdf.sh
+    if [ "$(expr substr $(uname -s) 1 5)" = 'Linux' ]; then
+        \. ~/.asdf/asdf.sh
     else
-        echo for intel asdf
-        . /usr/local/opt/asdf/libexec/asdf.sh
+        if [ "$(uname -m)" = "arm64" ]; then
+            echo for arm asdf
+            \. /opt/homebrew/opt/asdf/libexec/asdf.sh
+        else
+            echo for intel asdf
+            \. /usr/local/opt/asdf/libexec/asdf.sh
+        fi
     fi
 }
 
