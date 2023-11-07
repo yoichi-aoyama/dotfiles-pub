@@ -1,8 +1,10 @@
 echo bash
 PS1="\t(\w)>"
 
-if [ "$(uname)" = 'Darwin' ]; then
-  if [ "$(uname -m)" = "arm64" ]; then
+UNAME_S=`uname -s`
+
+if [ "`uname`" == 'Darwin' ]; then
+  if [ "`uname -m`" = "arm64" ]; then
     OS='ArmMac'
     # curl
     export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
@@ -12,15 +14,17 @@ if [ "$(uname)" = 'Darwin' ]; then
     OS='IntelMac'
     eval "$(/usr/local/bin/brew shellenv)"
   fi
-elif [ "$(expr substr $(uname -s) 1 5)" = 'Linux' ]; then
+elif [ "${UNAME_S:0:5}" == 'Linux' ]; then
   OS='Linux'
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-elif [ "$(expr substr $(uname -s) 1 10)" = 'MINGW32_NT' ]; then
+elif [ "${UNAME_S:0:10}" == 'MINGW32_NT' ]; then
   OS='Cygwin'
 else
-  echo "Your platform ($(uname -a)) is not supported."
+  echo "Your platform (`uname -a`) is not supported."
   exit 1
 fi
+
+
 
 # starship
 eval "$(starship init bash)"
@@ -87,18 +91,17 @@ function switch-anyenv {
 
 # for asdf
 function asdf-enable {
-    if [ "$(expr substr $(uname -s) 1 5)" = 'Linux' ]; then
-        \. ~/.asdf/asdf.sh
+    if [ "$(uname -m)" = "arm64" ]; then
+        echo for arm asdf
+        . /opt/homebrew/opt/asdf/libexec/asdf.sh
     else
-        if [ "$(uname -m)" = "arm64" ]; then
-            echo for arm asdf
-            \. /opt/homebrew/opt/asdf/libexec/asdf.sh
-        else
-            echo for intel asdf
-            \. /usr/local/opt/asdf/libexec/asdf.sh
-        fi
+        echo for intel asdf
+        . /usr/local/opt/asdf/libexec/asdf.sh
     fi
 }
+
+export EDITOR='vim'
+export VISUAL='vim'
 
 COMMONSHHOME="${HOME}/.commonsh"
 source $COMMONSHHOME/alias.sh
