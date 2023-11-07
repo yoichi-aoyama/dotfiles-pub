@@ -53,3 +53,7 @@ warpd_uninstall_mac: ## warpd uninstall for mac
 	sudo rm /usr/local/bin/warpd /usr/local/share/man/man1/warpd.1.gz /Library/LaunchAgents/com.warpd.warpd.plist
 install_tailscale: ## install_tailscale for linux
 	curl -fsSL https://tailscale.com/install.sh | sh
+vnc_start: ## vnc start
+	tigervncserver -xstartup /usr/bin/mate-session -geometry 800x600 -localhost no :1
+vnc_stop: ## vnc stop
+	tigervncserver -kill :1
