@@ -54,6 +54,6 @@ warpd_uninstall_mac: ## warpd uninstall for mac
 install_tailscale: ## install_tailscale for linux
 	curl -fsSL https://tailscale.com/install.sh | sh
 vnc_start: ## vnc start
-	tigervncserver -xstartup /usr/bin/mate-session -geometry 800x600 -localhost no :1
+	tigervncserver -xstartup /usr/bin/mate-session -geometry 1280x720 -localhost no :1
 vnc_stop: ## vnc stop
 	tigervncserver -kill :1
