@@ -20,6 +20,8 @@ else
   exit 1
 fi
 
+echo $OS
+
 # starship
 eval "$(starship init zsh)"
 # sheldon
@@ -50,6 +52,10 @@ setopt hist_no_store
 setopt hist_expand
 # 履歴をインクリメンタルに追加
 setopt inc_append_history
+
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey "^x^e" edit-command-line
 
 ######## END
 ### zprof
