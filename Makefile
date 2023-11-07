@@ -51,3 +51,5 @@ warpd_install_mac: ## warpd install for mac
 	curl -L https://github.com/rvaiya/warpd/releases/download/v1.3.5/warpd-1.3.5-osx.tar.gz |  sudo tar xzvfC - / && launchctl load /Library/LaunchAgents/com.warpd.warpd.plist
 warpd_uninstall_mac: ## warpd uninstall for mac
 	sudo rm /usr/local/bin/warpd /usr/local/share/man/man1/warpd.1.gz /Library/LaunchAgents/com.warpd.warpd.plist
+install_tailscale: ## install_tailscale for linux
+	curl -fsSL https://tailscale.com/install.sh | sh
