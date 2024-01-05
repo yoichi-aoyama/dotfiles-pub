@@ -4,8 +4,6 @@ export PATH=/usr/bin:/bin:/usr/sbin:/sbin
 export PATH=/usr/local/bin:$PATH
 
 export PATH=/opt/homebrew/bin:$PATH
-export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
-
 export PATH=$PATH:~/Library/Android/sdk/platform-tools
 export PATH=~/Library/Android/sdk/cmdline-tools/latest/bin:$PATH
 
@@ -83,11 +81,11 @@ findboth () {
 }
 
 grepext () {
-     grep -nriI "$1" ./* ./.* --exclude-dir=.git --exclude-dir=node_modules --exclude=.flutter-plugins-dependencies --exclude-dir=build --exclude-dir=.dart_tool --exclude-dir=Pods --exclude=.vstags --exclude-dir=backup --exclude-dir=build --exclude-dir=bk --exclude='*.svg' $2 $3 $4 $5
+     grep -nriI "$1" * .* --exclude-dir=.git --exclude-dir=node_modules --exclude=.flutter-plugins-dependencies --exclude-dir=build --exclude-dir=.dart_tool --exclude-dir=Pods --exclude=.vstags --exclude-dir=backup --exclude-dir=build --exclude-dir=bk --exclude='*.svg' --exclude-dir=tmp --exclude-dir=dist $2 $3 $4 $5
 }
 
 grepextsub () {
-     grep -nriI "$1" ./* --exclude-dir=.git --exclude-dir=node_modules --exclude=.flutter-plugins-dependencies --exclude-dir=build --exclude-dir=.dart_tool --exclude-dir=Pods --exclude=.vstags --exclude-dir=backup --exclude-dir=build --exclude-dir=bk $2 $3 $4 $5
+     grep -nriI "$1" * .* --exclude-dir=.git --exclude-dir=node_modules --exclude=.flutter-plugins-dependencies --exclude-dir=build --exclude-dir=.dart_tool --exclude-dir=Pods --exclude=.vstags --exclude-dir=backup --exclude-dir=build --exclude-dir=bk $2 $3 $4 $5
 }
 
 export PATH="/usr/local/sbin:$PATH"
@@ -157,17 +155,11 @@ function fzf-cdr () {
 zle -N fzf-cdr
 bindkey '^T' fzf-cdr
 
-# for asdf
-function asdf-enable () {
-    if [ "$(uname -m)" = "arm64" ]; then
-        echo for arm asdf
-        . /opt/homebrew/opt/asdf/libexec/asdf.sh
-    else
-        echo for intel asdf
-        . /usr/local/opt/asdf/libexec/asdf.sh
-    fi
+# for mise
+function mise-enable () {
+    eval "$(mise activate zsh)"
 }
-add-zsh-hook chpwd asdf-enable
+add-zsh-hook chpwd mise-enable
 
 # for neovim
 function n {
@@ -230,3 +222,39 @@ if [ "$(uname -m)" = "arm64" ]; then
 else
     export LESSOPEN='|  /usr/local/bin/src-hilite-lesspipe.sh %s'
 fi
+
+function ghq_cd_repository(){
+	local selected_repo="$(ghq list --full-path | fzf +s --query "$LBUFFER")"
+	if [ -n "$selected_repo" ]; then
+		BUFFER="cd ${selected_repo}"
+		zle accept-line
+	fi
+}
+zle -N ghq_cd_repository
+bindkey "^G" ghq_cd_repository
+
+
+# globalias
+globalias() {
+   # Get last word to the left of the cursor:
+   # (z) splits into words using shell parsing
+   # (A) makes it an array even if there's only one element
+   local word=${${(Az)LBUFFER}[-1]}
+   if [[ $GLOBALIAS_FILTER_VALUES[(Ie)$word] -eq 0 ]]; then
+      zle _expand_alias
+      zle expand-word
+   fi
+   zle self-insert
+}
+zle -N globalias
+
+# space expands all aliases, including global
+bindkey -M emacs " " globalias
+bindkey -M viins " " globalias
+
+# control-space to make a normal space
+bindkey -M emacs "^ " magic-space
+bindkey -M viins "^ " magic-space
+
+# normal space during searches
+bindkey -M isearch " " magic-space

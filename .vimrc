@@ -75,7 +75,7 @@ set directory=~/tmp/vim_backup
 
 " クリップボードにヤンクを共有
 if has("clipboard")
-  set clipboard=unnamed
+  set clipboard+=unnamed
 endif
 
 let g:quickhl_keywords = [

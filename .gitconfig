@@ -13,6 +13,7 @@
 	cob = checkout -b
 	sw  = switch
 	swc = switch -c
+	re  = restore
 	br  = branch
 	brv = branch -vv
 	ft  = fetch
@@ -26,3 +27,5 @@
     prune = true
 [push]
 	autoSetupRemote = true
+[rebase]
+	autostash = true

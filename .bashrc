@@ -24,7 +24,7 @@ else
   exit 1
 fi
 
-
+echo $OS
 
 # starship
 eval "$(starship init bash)"
@@ -89,15 +89,9 @@ function switch-anyenv {
     eval "$(anyenv init -)"
 }
 
-# for asdf
-function asdf-enable {
-    if [ "$(uname -m)" = "arm64" ]; then
-        echo for arm asdf
-        . /opt/homebrew/opt/asdf/libexec/asdf.sh
-    else
-        echo for intel asdf
-        . /usr/local/opt/asdf/libexec/asdf.sh
-    fi
+# for rtx
+function rtx-enable {
+    eval "$(rtx activate bash)"
 }
 
 export EDITOR='vim'

@@ -1,5 +1,8 @@
-golang 1.21.3
-flutter 3.10.6-stable
+golang 1.21.5
+flutter 3.13.9-stable
 nodejs 18.18.0
 yarn 1.22.19
-java corretto-8.382.05.1
+#java corretto-8.382.05.1
+java 21.0.1
+python 2.7.18
+perl 5.16.3
